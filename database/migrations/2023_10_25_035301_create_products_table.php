@@ -18,6 +18,11 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->string('discount')->unsiged();
+            $table->foreignId('tid')->commet('連鎖便利商店');
+            $table->foreign('tid')
+                  ->references('id')
+                  ->on('stores')
+                  ->onDelete('cascade');
             $table->integer('inventory')->unsiged();
             $table->timestamps();
         });
