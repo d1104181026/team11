@@ -47,7 +47,7 @@ class ProductsTableSeeder extends Seeder
         return $discount[rand(0, count($discount)-1)];
     }
     public function generateRandomTid() {
-        $tid = ['1', '2', '3'];
+        $tid = ['1', '2', '3','4'];
         return $tid[rand(0, count($tid)-1)];
     }
     public function generateRandomInventory() {
