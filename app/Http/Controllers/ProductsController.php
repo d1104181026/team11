@@ -14,8 +14,11 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
-        return Product::all()->toArray();
+        //從 Model 拿資料
+        //$p = Product::all()->toArray();
+        //把資料送給 view
+        //to-do
+        return view('products.index')->with('products',$p);
     }
 
     /**
