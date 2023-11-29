@@ -1,10 +1,8 @@
-<html>
+@extends('app')
 
-<head>
-    <title>列出所有商品</title>
-</head>
+@section('title', '便利店網站 - 列出所有商品')
 
-<body>
+@section('_contents')
 <h1>列出所有商品</h1>
 
 <table>
@@ -39,6 +37,5 @@
 
 <table>
 
-</body>
-</html>
+@endsection
 

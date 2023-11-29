@@ -3,7 +3,7 @@
 
 @section('title', '便利店網站 - 列出所有商店')
 
-@section('nba_contents')
+@section('_contents')
 <h1>列出所有商店</h1>
 
 <table>
@@ -17,10 +17,10 @@
         <th>操作2</th>
         <th>操作3</th>
     </tr>
-    @for($i=0; $i<count($teams); $i++)
+    @for($i=0; $i<count($stores); $i++)
         <tr>
             <td>{{ $stores[$i]['id'] }}</td>
-            <td>{{ $stores[$i]['convenient stores'] }}</td>
+            <td>{{ $stores[$i]['inventory'] }}</td>
             <td>{{ $stores[$i]['official web'] }}</td>
             <td><a href="{{ route('stores.show', ['id'=>$stores[$i]['id']]) }}">顯示</a></td>
             <td><a href="{{ route('stores.edit', ['id'=>$stores[$i]['id']]) }}">修改</a></td>    

@@ -14,8 +14,10 @@ class StoresController extends Controller
      */
     public function index()
     {
-        //
-        return Store::all()->toArray();
+        // 從 Model 拿資料
+        $t = Team::all()->toArray();
+        // 把資料送給 view
+        return view('stores.index')->with('stores', $t);
     }
 
     /**
@@ -47,7 +49,7 @@ class StoresController extends Controller
      */
     public function show($id)
     {
-        //
+        return store::findOrFail($id)->toArray();
     }
 
     /**
@@ -58,7 +60,7 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        return store::findOrFail($id)->toArray();
     }
 
     /**
