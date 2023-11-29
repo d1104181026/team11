@@ -1,10 +1,9 @@
-<html>
 
-<head>
-    <title>列出所有商品</title>
-</head>
+@extends('app')
 
-<body>
+@section('title', '便利店網站 - 列出所有商店')
+
+@section('nba_contents')
 <h1>列出所有商品</h1>
 
 <table>
@@ -18,7 +17,7 @@
         <td>操作2</td>
         <td>操作3</td>
     </tr>
-    @for(#i=o; $i<count(products); $i++)
+    @for(#i=o; $i<count($products); $i++)
         <tr>
             <td>{{ $products[$i]['id'] }}</td>
             <td>{{ $products[$i]['name'] }}</td>
@@ -33,7 +32,4 @@
     @endfor
 <table>
 
-
-</body>
-
-</html>
+@endsection
