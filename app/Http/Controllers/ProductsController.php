@@ -14,11 +14,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //從 Model 拿資料
-        //$p = Product::all()->toArray();
-        //把資料送給 view
-        //to-do
-        return view('products.index')->with('products',$p);
+        // 從 Model 拿資料
+        $products = Product::all();
+        // 把資料送給 view
+        return view ('products.index')->with('products',$products);
     }
 
     /**
@@ -50,7 +49,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        // 從 Model 拿資料
+        $product = Product::findOrFail($id);
+        // 把資料送給 view
+        return view ('products.show')->with('product',$product);
     }
 
     /**
@@ -61,7 +63,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return product::findOrFail($id)->toArray();
     }
 
     /**
