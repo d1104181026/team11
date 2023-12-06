@@ -20,20 +20,21 @@
 
 
 
-    @for($i=0; $i<count($products); $i++)
+    
+    @foreach ($products as $product)
         <tr>
-            <td>{{ $products[$i]['name'] }} </td>
-            <td>{{ $products[$i]['price'] }} </td>
-            <td>{{ $products[$i]['discount'] }} </td>
-            <td>{{ $products[$i]['tid'] }} </td>
-            <td>{{ $products[$i]['inventory'] }} </td>
-            <td><a href="{{ route('products.show',['id'=>$products[$i]['id']]) }}" > 顯示</a></td>
-            <td><a href="{{ route('products.edit',['id'=>$products[$i]['id']]) }}" > 修改</a></td>
+            <td>{{ $products->name }} </td>
+            <td>{{ $products->price }} </td>
+            <td>{{ $products->discount }} </td>
+            <td>{{ $products->tid }} </td>
+            <td>{{ $products->inventory }} </td>
+            <td><a href="{{ route('products.show',['id'=>$products->id]) }}" > 顯示</a></td>
+            <td><a href="{{ route('products.edit',['id'=>$products->id]) }}" > 修改</a></td>
             <td>刪除</td>
         </tr>
 
 
-    @endfor
+    @endforeach
 
 <table>
 

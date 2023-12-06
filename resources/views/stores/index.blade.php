@@ -17,16 +17,16 @@
         <th>操作2</th>
         <th>操作3</th>
     </tr>
-    @for($i=0; $i<count($stores); $i++)
+    @foreach($stores as $store)
         <tr>
-            <td>{{ $stores[$i]['id'] }}</td>
-            <td>{{ $stores[$i]['inventory'] }}</td>
-            <td>{{ $stores[$i]['official web'] }}</td>
-            <td><a href="{{ route('stores.show', ['id'=>$stores[$i]['id']]) }}">顯示</a></td>
-            <td><a href="{{ route('stores.edit', ['id'=>$stores[$i]['id']]) }}">修改</a></td>    
+            <td>{{ $stores->id }}</td>
+            <td>{{ $stores->inventory }}</td>
+            <td>{{ $stores->official web }}</td>
+            <td><a href="{{ route('stores.show', ['id'=>$stores->id]) }}">顯示</a></td>
+            <td><a href="{{ route('stores.edit', ['id'=>$stores->id]) }}">修改</a></td>    
             <td>刪除</td>    
         </tr>
-    @endfor
+    @endforeach
 <table>
 
 @endsection

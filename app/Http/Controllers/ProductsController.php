@@ -15,9 +15,9 @@ class ProductsController extends Controller
     public function index()
     {
         // 從 Model 拿資料
-        $p = Product::all()->toArray();
+        $products = Product::all();
         // 把資料送給 view
-        return view ('products.index')->with('products',$p);
+        return view ('products.index')->with('products',$products);
     }
 
     /**
@@ -37,9 +37,8 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+
+     //
 
     /**
      * Display the specified resource.
@@ -49,7 +48,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        return product::findOrFail($id)->toArray();
+        // 從 Model 拿資料
+        $product = Product::findOrFail($id);
+        // 把資料送給 view
+        return view('products.show')->with('player', $player);
     }
 
     /**
@@ -60,9 +62,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        return product::findOrFail($id)->toArray();
+        return Product::findOrFail($id)->toArray();
     }
-
     /**
      * Update the specified resource in storage.
      *
