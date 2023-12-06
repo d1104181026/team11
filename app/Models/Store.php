@@ -13,4 +13,9 @@ class Store extends Model
         'name',
         'web'
     ];
+
+    public function stores()
+    {
+        return $this->hasMany('App\Models\Store', 'tid');
+    }
 }
