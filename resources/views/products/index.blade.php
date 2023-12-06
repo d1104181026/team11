@@ -27,7 +27,7 @@
             <td>{{ $product->name }} </td>
             <td>{{ $product->price }} </td>
             <td>{{ $product->discount }} </td>
-            <td>{{ $product->tid }} </td>
+            <td>{{ $product->store->name }} </td>
             <td>{{ $product->inventory }} </td>
             <td><a href="{{ route('products.show',['id'=>$product->id ]) }}" > 顯示</a></td>
             <td><a href="{{ route('products.edit',['id'=>$product->id ]) }}" > 修改</a></td>
