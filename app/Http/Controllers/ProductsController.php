@@ -15,7 +15,7 @@ class ProductsController extends Controller
     public function index()
     {
         //return Product::all()->toArray();
-        $p = Product::all()->toArray();
+        $p = Product::all();
         return view('products.index')->with('products',$p);
     }
 
@@ -61,7 +61,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Product::findOrFail($id)->toArray();
     }
 
     /**
@@ -84,6 +84,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect('products');
     }
 }

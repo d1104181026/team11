@@ -16,4 +16,9 @@ class Product extends Model
         'inventory'
     ];
     
+    public function store()
+    {
+        return $this->belongsTo('App\Models\Store', 'tid','id');
+    }
+
 }

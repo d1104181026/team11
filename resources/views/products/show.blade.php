@@ -9,5 +9,5 @@
 價格：{{ $product->price }}<br/>
 優惠：{{ $product->discount }}<br/>
 庫存量：{{ $product->inventory }}<br/>
-連鎖便利店：{{ $product->tid }}<br/>
+連鎖商店：{{ $product->store->name }}</td>
 @endsection

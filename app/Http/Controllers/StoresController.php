@@ -49,7 +49,8 @@ class StoresController extends Controller
     public function show($id)
     {
         $store = store::findOrFail($id);
-        return view('stores.show')->with('store',$store);
+        $products = $store->products;
+        return view('stores.show', ['store'=>$store, 'products'=>$products]); 
     }
 
     /**
@@ -60,7 +61,7 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Store::findOrFail($id)->toArray();
     }
 
     /**
@@ -83,6 +84,8 @@ class StoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $store = store::findOrFail($id);
+        $store->delete();
+        return redirect('stores');
     }
 }

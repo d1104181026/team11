@@ -13,4 +13,15 @@ class Store extends Model
         'name',
         'web'
     ];
-}
+    
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product', 'tid');
+    }
+
+    public function delete()
+    {
+        $this->products()->delete();
+        return parent::delete();
+    }   
+}     
