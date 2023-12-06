@@ -3,31 +3,30 @@
 
 @section('title', '便利店網站 - 列出所有商店')
 
-@section('nba_contents')
+@section('_contents')
 <h1>列出所有商店</h1>
 
 <table>
     <tr>
-        <td>編號</td>
-        <td>連鎖便利店</td>
-        <td>官網</td>
-        <td>建立時間</td>
-        <td>修改時間</td>
-        <td>操作1</td>
-        <td>操作2</td>
-        <td>操作3</td>
+        <th>編號</th>
+        <th>連鎖便利店</th>
+        <th>官網</th>
+        <th>建立時間</th>
+        <th>修改時間</th>
+        <th>操作1</th>
+        <th>操作2</th>
+        <th>操作3</th>
     </tr>
-    @for(#i=o; $i<count($stores); $i++)
+    @foreach($stores as $store)
         <tr>
-            <td>{{ $products[$i]['id'] }}</td>
-            <td>{{ $products[$i]['convenient stores'] }}</td>
-            <td>{{ $products[$i]['official web'] }}</td>
-            <td><a href="{{route('stores.show',['id'=>#products[$i]['id']]) }}" >顯示</a></td>
-            <td><a href="{{route('stores.edit',['id'=>#products[$i]['id']]) }}" >修改</a></td>
-            <td>刪除</td>
+            <td>{{ $store->id }}</td>
+            <td>{{ $store->inventory }}</td>
+            <td>{{ $store->official web }}</td>
+            <td><a href="{{ route('stores.show', ['id'=>$store->id]) }}">顯示</a></td>
+            <td><a href="{{ route('stores.edit', ['id'=>$store->id]) }}">修改</a></td>    
+            <td>刪除</td>    
         </tr>
-    @endfor
+    @endforeach
 <table>
-
 
 @endsection
