@@ -37,8 +37,9 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
-     //
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -46,12 +47,13 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         // 從 Model 拿資料
         $product = Product::findOrFail($id);
         // 把資料送給 view
-        return view('products.show')->with('player', $player);
+        return view ('products.show')->with('product',$product);
     }
 
     /**
@@ -62,8 +64,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        return Product::findOrFail($id)->toArray();
+        return product::findOrFail($id)->toArray();
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -84,6 +87,9 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $product = product::findOrFail($id);
+        $product->delete();
+        return redirect('products');
     }
 }

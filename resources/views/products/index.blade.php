@@ -30,7 +30,13 @@
             <td>{{ $products->inventory }} </td>
             <td><a href="{{ route('products.show',['id'=>$products->id]) }}" > 顯示</a></td>
             <td><a href="{{ route('products.edit',['id'=>$products->id]) }}" > 修改</a></td>
-            <td>刪除</td>
+            <td>
+                <form action="{{ url('/products/delete', ['id' => $product->id]) }}" method="post">
+                    <input class="btn btn-default" type="submit" value="刪除" />
+                    @method('delete')
+                    @csrf
+                </form>
+            </td>
         </tr>
 
 

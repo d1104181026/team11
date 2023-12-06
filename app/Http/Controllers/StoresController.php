@@ -51,8 +51,10 @@ class StoresController extends Controller
     {
         // 從 Model 拿資料
         $store = Store::findOrFail($id);
+        $products = $store->products();
         // 把資料送給 view
-        return view ('stores.show')->with('store',$store);
+        return view ('stores.show',['store'=>$store,'products'=>$products]);
+
     }
 
     /**
@@ -86,6 +88,8 @@ class StoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $store = store::findOrFail($id);
+        $store->delete();
+        return redirect('stores');
     }
 }

@@ -22,9 +22,11 @@ Route::get('/', function() {
 // 顯示顯示所有商品資料
 Route::get('products', [ProductsController::class, 'index'])->name('products.index');
 // 顯示單一商品資料
-Route::get('players/{id}', [ProductsController::class, 'show'])->where('id', '[0-9]+')->name('products.show');
+Route::get('products/{id}', [ProductsController::class, 'show'])->where('id', '[0-9]+')->name('products.show');
 // 修改單一商品表單
-Route::get('players/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
+Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
+// 刪除單一球員資料
+Route::delete('products/delete/{id}', [ProductsController::class, 'destroy'])->where('id', '[0-9]+')->name('products.destroy');
 
 // 顯示顯示所有商店資料
 Route::get('teams', [StoresController::class, 'index'])->name('stores.index');
@@ -32,3 +34,5 @@ Route::get('teams', [StoresController::class, 'index'])->name('stores.index');
 Route::get('teams/{id}', [StoresController::class, 'show'])->where('id', '[0-9]+')->name('stores.show');
 // 修改單一商店表單
 Route::get('teams/{id}/edit', [StoresController::class, 'edit'])->where('id', '[0-9]+')->name('stores.edit');
+// 刪除單一球隊及旗下球員資料
+Route::delete('stores/delete/{id}', [StoresController::class, 'destroy'])->where('id', '[0-9]+')->name('stores.destroy');
