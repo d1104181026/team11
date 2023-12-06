@@ -15,7 +15,8 @@ class StoresController extends Controller
     public function index()
     {
         //
-        return Store::all()->toArray();
+        $s = Store::all()->toArray();
+        return view('stores.index')->with('stores',$s);
     }
 
     /**
@@ -47,7 +48,8 @@ class StoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $store = store::findOrFail($id);
+        return view('stores.show')->with('store',$store);
     }
 
     /**

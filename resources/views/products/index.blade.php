@@ -3,7 +3,9 @@
 
 @section('title', '電子標籤自動化系統 - 列出所有商品')
 
-@section('ESL_contents')
+@section('ETAS_theme', '商品')
+
+@section('ETAS_contents')
 <h1>列出所有商品</h1>
 
 <table>
@@ -23,8 +25,8 @@
             <td>{{ $products[$i]['name'] }} </td>
             <td>{{ $products[$i]['price'] }} </td>
             <td>{{ $products[$i]['discount'] }} </td>
-            <td>{{ $products[$i]['tid'] }} </td>
             <td>{{ $products[$i]['inventory'] }} </td>
+            <td>{{ $products[$i]['tid'] }} </td>
             <td><a href="{{ route('products.show',['id'=>$products[$i]['id']]) }}" > 顯示</a></td>
             <td><a href="{{ route('products.edit',['id'=>$products[$i]['id']]) }}" > 修改</a></td>
             <td>刪除</td>

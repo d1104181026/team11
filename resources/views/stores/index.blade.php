@@ -1,9 +1,8 @@
-
 @extends('app')
 
 @section('title', '電子標籤自動化系統 - 列出所有商店')
 
-@section('ESL_contents')
+@section('ETAS_contents')
 <h1>列出所有商店</h1>
 
 <table>
@@ -15,15 +14,15 @@
         <th>操作2</th>
         <th>操作3</th>
     </tr>
-    @for($i=0; $i<count($stores); $i++)
+    @foreach($stores as $store)
         <tr>
-            <td>{{ $players[$i]['id'] }}</td>
-            <td>{{ $players[$i]['name'] }}</td>
-            <td>{{ $players[$i]['web'] }}</td>
-            <td><a href="{{ route('stores.show', ['id'=>$stores[$i]['id']]) }}">顯示</a></td>
-            <td><a href="{{ route('stores.edit', ['id'=>$stores[$i]['id']]) }}">修改</a></td>    
+            <td>{{ $store['id'] }}</td>
+            <td>{{ $store['name'] }}</td>
+            <td><a href="{{ $store['web'] }}" target="_blank">{{ $store['web'] }}</a></td>
+            <td><a href="{{ route('stores.show', ['id' => $store['id']]) }}">顯示</a></td>
+            <td><a href="{{ route('stores.edit', ['id' => $store['id']]) }}">修改</a></td>    
             <td>刪除</td>    
         </tr>
-    @endfor
-<table>
+    @endforeach
+</table>
 @endsection
