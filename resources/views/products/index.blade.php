@@ -20,18 +20,24 @@
     </tr>
 
 
-
+    
 
     @foreach ($players as $player)
         <tr>
             <td>{{ $product->name }} </td>
             <td>{{ $product->price }} </td>
             <td>{{ $product->discount }} </td>
-            <td>{{ $product->store->name }} </td>
             <td>{{ $product->inventory }} </td>
+            <td>{{ $product->store->name }} </td>
             <td><a href="{{ route('products.show',['id'=>$product->id ]) }}" > 顯示</a></td>
             <td><a href="{{ route('products.edit',['id'=>$product->id ]) }}" > 修改</a></td>
-            <td>刪除</td>
+            <td>
+                <form action="{{ url('/products/delete', ['id' => $product->id]) }}" method="post">
+                    <input class="btn btn-default" type="submit" value="刪除" />
+                    @method('delete')
+                    @csrf
+                </form>
+            </td>
         </tr>
     @endforeach
 

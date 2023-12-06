@@ -18,4 +18,10 @@ class Store extends Model
     {
         return $this->hasMany('App\Models\Store', 'tid');
     }
+
+    public function delete()
+    {
+        $this->products()->delete();
+        return parent::delete();
+    }
 }

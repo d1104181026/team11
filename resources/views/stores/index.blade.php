@@ -24,7 +24,13 @@
             <td>{{ $store->official web }}</td>
             <td><a href="{{ route('stores.show', ['id'=>$store->id]) }}">顯示</a></td>
             <td><a href="{{ route('stores.edit', ['id'=>$store->id]) }}">修改</a></td>    
-            <td>刪除</td>    
+            <td>
+            <form action="{{ url('/stores/delete', ['id' => $store->id]) }}" method="post">
+                    <input class="btn btn-default" type="submit" value="刪除" />
+                    @method('delete')
+                    @csrf
+                </form>
+            </td>    
         </tr>
     @endforeach
 <table>
