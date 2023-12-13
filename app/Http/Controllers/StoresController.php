@@ -38,7 +38,17 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $web = $request->input('web');
+        
+
+        Team::create([
+            'name' => $name,
+            'web' => $web,
+            
+        ]);
+
+        return redirect('stores');
     }
 
     /**
@@ -77,7 +87,14 @@ class StoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $store = Store::findOrFail($id);
+
+        $store->name = $request->input('name');
+        $store->web = $request->input('web');
+        
+        $store->save();
+
+        return redirect('stores');
     }
 
     /**
