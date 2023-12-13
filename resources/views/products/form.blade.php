@@ -4,7 +4,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('tid','所屬商店：') !!}
-    <!-- 待設計一下拉是選單 -->
+    {!! Form::select('tid', $stores, $storeSelected, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('price','商品價格：') !!}

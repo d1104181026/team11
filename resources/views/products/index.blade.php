@@ -4,8 +4,11 @@
 
 @section('您所選取的商品資料')
 
-@section('_contents')
-<h1>列出所有商品</h1>
+@section('product_contents')
+<div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+    <a href="{{ route('products.create') }} ">新增商品</a>
+    <a href="{{ route('products.index') }} ">所有商品</a>
+</div>
 
 <table>
     <tr>

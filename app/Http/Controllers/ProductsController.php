@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Store;
 
 class ProductsController extends Controller
 {
@@ -27,7 +28,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $teams = Team::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
+        return view('products.create', ['teams' =>$stores, 'storeSelected' => null]);
     }
 
     /**
@@ -38,7 +40,21 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $tid = $request->input('tid');
+        $price = $request->input('price');
+        $discount = $request->input('discount');
+        $inventory = $request->input('inventory');
+        
+
+        $product = Product::create([
+            'name'=>$name,
+            'tid'=>$tid,
+            'price'=>$price,
+            'discount'=>$discount,
+            'inventory'=>$inventory]);
+
+        return redirect('products');
     }
 
     /**
@@ -63,8 +79,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $player = Player::findOrFail($id);
-        return view('players.edit',['player' => $player]);
+        $product = Product::findOrFail($id);
+        $stores = Store::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
+        $selected_tags = $product->store->id;
+        return view('products.edit', ['product' =>$product, 'stores' => $stores, 'storeSelected' => $selected_tags]);
     }
 
     /**
@@ -76,7 +94,16 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Player::findOrFail($id);
+
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
+        $product->tid = $request->input('tid');
+        $product->inventory = $request->input('inventory');
+        $product->save();
+
+        return redirect('products');
     }
 
     /**
