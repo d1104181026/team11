@@ -50,3 +50,5 @@ Route::get('stores/create', [StoresController::class, 'create'])->name('stores.c
 Route::get('stores/update/{id}', [StoresController::class, 'update'])->where('id','[0-9]+')->name('stores.edit');
 //修改商店資料
 Route::patch('stores/update/{id}', [StoresController::class, 'update'])->where('id','[0-9]+')->name('stores.edit');
+// 儲存新商店資料
+Route::post('stores/store', [StoresController::class, 'store'])->name('stores.store');
