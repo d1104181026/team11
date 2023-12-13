@@ -26,6 +26,8 @@ Route::get('products/{id}', [ProductsController::class, 'show'])->where('id', '[
 Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
 //刪除單一商品資料
 Route::delete('products/delete/{id}', [ProductsController::class, 'destroy'])->where('id', '[0-9]+')->name('products.destroy');
+//新增商品表單
+Route::get('player/create', [ProductsController::class, 'create'])->name('products.create');
 
 //顯示所有商店資料
 Route::get('stores', [StoresController::class, 'index'])->name('stores.index');
@@ -35,3 +37,5 @@ Route::get('stores/{id}', [StoresController::class, 'show'])->where('id', '[0-9]
 Route::get('stores/{id}/edit', [StoresController::class, 'edit'])->where('id', '[0-9]+')->name('stores.edit');
 //刪除單一商店及所屬商品資料
 Route::delete('stores/delete/{id}', [StoresController::class, 'destroy'])->where('id', '[0-9]+')->name('stores.destroy');
+//新增商店表單
+Route::get('stores/create', [StoresController::class, 'create'])->name('stores.create');

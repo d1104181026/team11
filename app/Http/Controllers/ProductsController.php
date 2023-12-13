@@ -27,7 +27,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -63,7 +63,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        return product::findOrFail($id)->toArray();
+        $player = Player::findOrFail($id);
+        return view('players.edit',['player' => $player]);
     }
 
     /**
