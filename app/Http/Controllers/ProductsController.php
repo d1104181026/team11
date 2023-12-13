@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\store;
 
 class ProductsController extends Controller
 {
@@ -27,7 +28,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $teams = Team::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
+        return view('products.create', ['teams' =>$stores, 'storeSelected' => null]);
     }
 
     /**
@@ -38,7 +40,21 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $tid = $request->input('tid');
+        $price = $request->input('price');
+        $discount = $request->input('discount');
+        $inventory = $request->input('inventory');
+        
+
+        $product = Product::create([
+            'name'=>$name,
+            'tid'=>$tid,
+            'price'=>$price,
+            'discount'=>$discount,
+            'inventory'=>$inventory]);
+
+        return redirect('products');
     }
 
     /**
@@ -64,7 +80,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        return product::findOrFail($id)->toArray();
+        $product = Product::findOrFail($id);
+        $stores = Store::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
+        $selected_tags = $product->store->id;
+        return view('products.edit', ['product' =>$product, 'stores' => $stores, 'storeSelected' => $selected_tags]);
     }
 
     /**
@@ -76,7 +95,16 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->name = $request->input('name');
+        $product->tid = $request->input('tid');
+        $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
+        $product->inventory = $request->input('inventory');
+        $product->save();
+
+        return redirect('players');
     }
 
     /**
