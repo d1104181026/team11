@@ -8,17 +8,14 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('price','價格:') !!}
+    {!! Form::label('price','商品價格:') !!}
     {!! Form::text('price',null ,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('discount', '優惠：') !!}
     {!! Form::text('discount', null, ['class' => 'form-control']) !!}
 </div>
-<div class="form-group">
-    {!! Form::label('tid', '連鎖便利店：') !!}
-    {!! Form::text('tid', null, ['class' => 'form-control']) !!}
-</div>
+
 <div class="form-group">
     {!! Form::label('inventory', '庫存量：') !!}
     {!! Form::text('inventory', null, ['class' => 'form-control']) !!}
