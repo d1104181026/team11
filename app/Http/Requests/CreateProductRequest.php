@@ -25,7 +25,6 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2|max:191',
-            'id' => 'required',
             'tid' => 'required',
             'price' => 'nullable',
             'discount' => 'nullable',
@@ -38,7 +37,6 @@ class CreateProductRequest extends FormRequest
         return [
             "name.required" => "商品名稱 為必填",
             "name.min" => "商品名稱 至少需2個字元",
-            "id.required" => "商品名稱 為必填",
             "tid.required" => "商店名稱 為必填",
             "price" => "商品價格 為必填",
             "discount" => "商品優惠 為必填",
