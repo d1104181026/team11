@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Store;
+use App\Http\Requests\CreateStoreRequest;
 
 class StoresController extends Controller
 {
@@ -36,7 +36,7 @@ class StoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateStoreRequest $request)
     {
         
         $name = $request->input('name');
@@ -83,7 +83,7 @@ class StoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateStoreRequest $request, $id)
     {
         $store = Store::findOrFail($id);
 
