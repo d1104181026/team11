@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Store;
+use App\Http\Requests\CreateProductRequest;
 
 class ProductsController extends Controller
 {
@@ -38,7 +38,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         $name = $request->input('name');
         $tid = $request->input('tid');
@@ -92,7 +92,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateProductRequest $request, $id)
     {
         $product = Player::findOrFail($id);
 
