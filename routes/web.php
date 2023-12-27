@@ -24,6 +24,8 @@ Route::get('products', [ProductsController::class, 'index'])->name('products.ind
 Route::get('products/{id}', [ProductsController::class, 'show'])->where('id', '[0-9]+')->name('products.show');
 // 選定位置查詢商品
 Route::get('products/position', [ProductsController::class, 'position'])->name('products.position');
+// 選定商店查詢商品
+Route::get('products/nationality', [ProductsController::class, 'nationality'])->name('products.nationality');
 //修改單一商品資料
 Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
 //刪除單一商品資料
