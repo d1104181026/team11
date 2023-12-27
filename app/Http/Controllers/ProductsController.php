@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\store;
 use App\Http\Requests\CreateProductRequest;
+use Illuminate\Http\Request;
+
 
 class ProductsController extends Controller
 {
@@ -18,8 +20,9 @@ class ProductsController extends Controller
      {
          // 從 Model 拿資料
          $products = Product::paginate(25);
+         $positions = Product::allPositions()->pluck('products.position', 'products.position');
         //把資料送給view
-        return view('products.index')->with('products',$products);
+        return view('products.index', ['products' => $products, 'positions'=>$positions, 'selectedPosition'=>null]);
 
                          
     }  
@@ -31,7 +34,7 @@ class ProductsController extends Controller
         $products = Product::paginate(25);
         $positions = Product::allPositions()->pluck('products.position', 'products.position');
         //把資料送給view
-        return view('products.index', ['products' => $products, 'positions'=>$positions]);
+        return view('products.index', ['products' => $products, 'positions'=>$positions, 'selectedPosition'=>null]);
           
     }
 
@@ -41,7 +44,8 @@ class ProductsController extends Controller
        
         $products = Product::position($request->input('pos'))->paginate(25);
         $positions = Product::allPositions()->pluck('products.position', 'products.position');
-        return view('products.index', ['products' => $products, 'positions'=>$positions]);
+        $selectedPosition = $request->input('pos');
+        return view('products.index', ['products' => $products, 'positions'=>$positions, 'selectedPosition'=>$selectedPosition]);
     }   
     
     /**
