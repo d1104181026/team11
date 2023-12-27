@@ -45,7 +45,7 @@ Route::get('teams', [StoresController::class, 'index'])->name('stores.index');
 Route::get('teams/{id}', [StoresController::class, 'show'])->where('id', '[0-9]+')->name('stores.show');
 // 修改單一商店表單
 Route::get('teams/{id}/edit', [StoresController::class, 'edit'])->where('id', '[0-9]+')->name('stores.edit');
-// 刪除單一球隊及旗下球員資料
+// 刪除單一商店及旗下商品資料
 Route::delete('stores/delete/{id}', [StoresController::class, 'destroy'])->where('id', '[0-9]+')->name('stores.destroy');
 // 新增商店表單
 Route::get('stores/create', [StoresController::class, 'create'])->name('stores.create');
