@@ -8,6 +8,9 @@
 <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
     <a href="{{ route('products.create') }} ">新增商品</a>
     <a href="{{ route('products.index') }} ">所有商品</a>
+    <form action="{{ url('players/position') }}" method='GET'>
+    {!! Form::label('pos', '選取位置：') !!}
+    {!! Form::select('pos', $positions, $selectedPosition, ['class' => 'form-control']) !!}
 </div>
 
 <table>
