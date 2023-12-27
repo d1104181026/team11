@@ -29,13 +29,13 @@
     
     @foreach ($products as $product)
         <tr>
-            <td>{{ $products->name }} </td>
-            <td>{{ $products->price }} </td>
-            <td>{{ $products->discount }} </td>
-            <td>{{ $products->tid }} </td>
-            <td>{{ $products->inventory }} </td>
-            <td><a href="{{ route('products.show',['id'=>$products->id]) }}" > 顯示</a></td>
-            <td><a href="{{ route('products.edit',['id'=>$products->id]) }}" > 修改</a></td>
+            <td>{{ $product->name }} </td>
+            <td>{{ $product->price }} </td>
+            <td>{{ $product->discount }} </td>
+            <td>{{ $product->tid }} </td>
+            <td>{{ $product->inventory }} </td>
+            <td><a href="{{ route('products.show',['id'=>$product->id]) }}" > 顯示</a></td>
+            <td><a href="{{ route('products.edit',['id'=>$product->id]) }}" > 修改</a></td>
             <td>
                 <form action="{{ url('/products/delete', ['id' => $product->id]) }}" method="post">
                     <input class="btn btn-default" type="submit" value="刪除" />
@@ -49,6 +49,7 @@
     @endforeach
 
 <table>
+{{ $products->links() }}
 
 @endsection
 
