@@ -45,6 +45,7 @@
     @endforeach
 
 <table>
+{{ $products->links() }}
 
 @endsection
 

@@ -16,10 +16,28 @@ class ProductsController extends Controller
     public function index()
     {
         // 從 Model 拿資料
-        $products = Product::all();
+        $products = Product::paginate(25);
         // 把資料送給 view
         return view ('products.index')->with('products',$products);
     }
+
+    public function indexs()
+    {
+        // 從 Model 拿特定條件下的資料
+        $products = Product::paginate(25);
+        $positions = Product::allPositions()->pluck('products.position', 'products.position');
+        //把資料送給view
+        return view('products.index', ['products' => $products, 'positions'=>$positions]);
+
+    }
+
+    public function position(Request $request)
+    {
+
+        $products = Product::position($request->input('pos'))->paginate(25);
+        $positions = Product::allPositions()->pluck('products.position', 'products.position');
+        return view('products.index', ['products' => $products, 'positions'=>$positions]);
+    }   
 
     /**
      * Show the form for creating a new resource.
