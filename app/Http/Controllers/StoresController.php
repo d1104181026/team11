@@ -14,8 +14,10 @@ class StoresController extends Controller
      */
     public function index()
     {
-        //
-        return Store::all()->toArray();
+        // 從 Model 拿資料
+        $stores = Team::all();
+        // 把資料送給 view
+        return view('stores.index')->with('stores', $stores);
     }
 
     /**
@@ -36,7 +38,17 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $web = $request->input('web');
+        
+
+        Team::create([
+            'name' => $name,
+            'web' => $web,
+            
+        ]);
+
+        return redirect('stores');
     }
 
     /**
@@ -47,7 +59,12 @@ class StoresController extends Controller
      */
     public function show($id)
     {
-        //
+        // 從 Model 拿資料
+        $store = Store::findOrFail($id);
+        $products = $store->products();
+        // 把資料送給 view
+        return view ('stores.show',['store'=>$store,'products'=>$products]);
+
     }
 
     /**
@@ -58,7 +75,7 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        return store::findOrFail($id)->toArray();
     }
 
     /**
@@ -70,7 +87,14 @@ class StoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $store = Store::findOrFail($id);
+
+        $store->name = $request->input('name');
+        $store->web = $request->input('web');
+        
+        $store->save();
+
+        return redirect('stores');
     }
 
     /**
@@ -81,6 +105,8 @@ class StoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $store = store::findOrFail($id);
+        $store->delete();
+        return redirect('stores');
     }
 }
