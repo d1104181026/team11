@@ -21,20 +21,32 @@ class ProductsController extends Controller
          // 從 Model 拿資料
          $products = Product::paginate(25);
          $positions = Product::allPositions()->pluck('products.position', 'products.position');
+         $positions = Product::allPositions()->pluck('products.price', 'products.price');
+
         //把資料送給view
-        return view('products.index', ['products' => $products, 'positions'=>$positions, 'selectedPosition'=>null]);
+        return view('products.index', ['products' => $products,
+                                      'positions'=>$positions,
+                                      'selectedPosition'=>null,
+                                      'nationalities'=>$nationalities,
+                                      'selectedNationality'=>null]);
 
                          
     }  
  
 
-    public function indexs()
+    public function senior()
     {
         // 從 Model 拿特定條件下的資料
         $products = Product::paginate(25);
         $positions = Product::allPositions()->pluck('products.position', 'products.position');
+        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
         //把資料送給view
-        return view('products.index', ['products' => $products, 'positions'=>$positions, 'selectedPosition'=>null]);
+        return view('products.index', ['products' => $products,
+                                        'positions'=>$positions,
+                                        'selectedPosition'=>null,
+                                        'nationalities'=>$nationalities,
+                                        'selectedNationality'=>null]);
+
           
     }
 
@@ -45,7 +57,25 @@ class ProductsController extends Controller
         $products = Product::position($request->input('pos'))->paginate(25);
         $positions = Product::allPositions()->pluck('products.position', 'products.position');
         $selectedPosition = $request->input('pos');
-        return view('products.index', ['products' => $products, 'positions'=>$positions, 'selectedPosition'=>$selectedPosition]);
+        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
+        return view('players.index', ['products' => $products,
+                                      'positions'=>$positions,
+                                      'selectedPosition'=>$selectedPosition,
+                                      'nationalities'=>$nationalities,
+                                      'selectedNationality'=>null]);
+    }
+
+    public function nationality(Request $request)
+    {
+        $players = Product::nationality($request->input('nationality'))->paginate(25);
+        $positions = Product::allPositions()->pluck('products.position', 'products.position');
+        $selectedNationality = $request->input('nationality');
+        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
+        return view('products.index', ['products' => $products,
+                                      'positions'=>$positions,
+                                      'selectedPosition'=>null,
+                                      'nationalities'=>$nationalities,
+                                      'selectedNationality'=>$selectedNationality]);
     }   
     
     /**
@@ -131,7 +161,7 @@ class ProductsController extends Controller
         $product->inventory = $request->input('inventory');
         $product->save();
 
-        return redirect('players');
+        return redirect('products');
     }
 
     /**

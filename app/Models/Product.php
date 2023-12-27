@@ -27,5 +27,25 @@ class Product extends Model
         
         return $query->where('price', '>', 10)->orderBy('price', 'asc');
     }
+    public function scopeAllPositions($query)
+    { 
+        return $query->select('price')->groupBy('price');
+    }
+
+    public function scopePosition($query, $pos)
+    {
+        return $query->where('price', '=', $pos);
+    } 
+    
+    public function scopeAllNationalities($query)
+    { 
+        return $query->select('nationality')->groupBy('nationality');
+    }
+
+    public function scopeNationality($query, $nationality)
+    {
+        return $query->where('nationality', '=', $nationality);
+    }    
+
     
 }
