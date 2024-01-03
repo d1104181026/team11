@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\store;
+use App\Http\Requests\CreateProductRequest;
+use Illuminate\Http\Request;
+
 
 class ProductsController extends Controller
 {
@@ -13,14 +15,51 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-        {
-            // 從 Model 拿資料
-            $products = Product::all();
-            // 把資料送給 view
-            return view ('products.index')->with('products',$products);
-        }
 
+     public function index()
+     {
+         // 從 Model 拿資料
+         $products = Product::paginate(25);
+         $discounts = Product::allDiscounts()->pluck('products.discount', 'products.discount');
+
+        //把資料送給view
+        return view('products.index', ['products' => $products,
+                                      'discounts'=>$discounts,
+                                      'selectedDiscount'=>null]);
+
+                         
+    }  
+ 
+
+    public function senior()
+    {
+        // 從 Model 拿特定條件下的資料
+        $products = Product::paginate(25);
+        $positions = Product::allPositions()->pluck('products.position', 'products.position');
+        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
+        //把資料送給view
+        return view('products.index', ['products' => $products,
+                                        'positions'=>$positions,
+                                        'selectedPosition'=>null,
+                                        'nationalities'=>$nationalities,
+                                        'selectedNationality'=>null]);
+
+          
+    }
+
+
+    public function discount(Request $request)
+    {
+       
+        $products = Product::discount($request->input('discount'))->paginate(25);
+        $discounts = Product::allDiscounts()->pluck('products.discount', 'products.discount');
+        $selectedDiscount = $request->input('discount');
+        return view('products.index', ['products' => $products,
+                                      'discounts'=>$discounts,
+                                      'selectedDiscount'=>$selectedDiscount]);
+    }
+
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +77,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         $name = $request->input('name');
         $tid = $request->input('tid');
@@ -93,7 +132,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
 
@@ -104,7 +143,7 @@ class ProductsController extends Controller
         $product->inventory = $request->input('inventory');
         $product->save();
 
-        return redirect('players');
+        return redirect('products');
     }
 
     /**

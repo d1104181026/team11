@@ -19,11 +19,11 @@
     </tr>
     @foreach($stores as $store)
         <tr>
-            <td>{{ $stores->id }}</td>
-            <td>{{ $stores->inventory }}</td>
-            <td>{{ $stores->official web }}</td>
-            <td><a href="{{ route('stores.show', ['id'=>$stores->id]) }}">顯示</a></td>
-            <td><a href="{{ route('stores.edit', ['id'=>$stores->id]) }}">修改</a></td>    
+            <td>{{ $store->id }}</td>
+            <td>{{ $store->inventory }}</td>
+            <td>{{ $store->web }}</td>
+            <td><a href="{{ route('stores.show', ['id'=>$store->id]) }}">顯示</a></td>
+            <td><a href="{{ route('stores.edit', ['id'=>$store->id]) }}">修改</a></td>    
             <td>
                 <form action="{{ url('/stores/delete', ['id' => $store->id]) }}" method="post">
                     <input class="btn btn-default" type="submit" value="刪除" />
