@@ -58,3 +58,6 @@ Route::patch('stores/update/{id}', [StoresController::class, 'update'])->where('
 // 儲存新商店資料
 Route::post('stores/store', [StoresController::class, 'store'])->name('stores.store');
   
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
