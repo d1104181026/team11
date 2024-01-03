@@ -1,9 +1,11 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Store;
 use App\Http\Requests\CreateStoreRequest;
+
 class StoresController extends Controller
 {
     /**
@@ -14,7 +16,24 @@ class StoresController extends Controller
     public function index()
     {
         // 從 Model 拿資料
-        $stores = Team::all();
+        $stores = Store::all();
+        // 把資料送給 view
+        return view('stores.index')->with('stores', $stores);
+    }
+
+    public function eastern()
+    {
+        // 從 Model 拿資料
+        $stores = Store::zone('Eastern Conference')->get();
+        // 把資料送給 view
+        return view('stores.index')->with('stores', $stores);
+    }
+
+
+    public function western()
+    {
+        // 從 Model 拿資料
+        $stores = Store::zone('Western Conference')->get();
         // 把資料送給 view
         return view('stores.index')->with('stores', $stores);
     }
@@ -24,9 +43,12 @@ class StoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
         //
+        return view('stores.create');
     }
 
     /**
@@ -37,6 +59,18 @@ class StoresController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|min:2|max:100',
+            'web' => 'required|string|min:2|max:100',
+            
+        ], [
+            "name.required" => "商店名稱 為必填",
+            "name.min" => "商店名稱 至少需2個字元",
+            "web.required" => "官網 為必填",
+            "web.min" => "官網 至少需2個字元",
+           
+        ]);
+
         $name = $request->input('name');
         $web = $request->input('web');
         
@@ -74,7 +108,8 @@ class StoresController extends Controller
      */
     public function edit($id)
     {
-        return store::findOrFail($id)->toArray();
+        $store = Store::findOrFail($id);
+        return view('stores.edit', ['store'=>$store]);
     }
 
     /**
@@ -86,11 +121,23 @@ class StoresController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|min:2|max:100',
+            'web' => 'required|string|min:2|max:100',
+            
+        ], [
+            "name.required" => "商店名稱 為必填",
+            "name.min" => "商店名稱 至少需2個字元",
+            "web.required" => "官網 為必填",
+            "web.min" => "官網 至少需2個字元",
+           
+        ]);
+
         $store = Store::findOrFail($id);
 
         $store->name = $request->input('name');
         $store->web = $request->input('web');
-        
+
         $store->save();
 
         return redirect('stores');
@@ -104,7 +151,7 @@ class StoresController extends Controller
      */
     public function destroy($id)
     {
-        $store = store::findOrFail($id);
+        $store = Store::findOrFail($id);
         $store->delete();
         return redirect('stores');
     }
