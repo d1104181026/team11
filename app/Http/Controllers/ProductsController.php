@@ -20,15 +20,12 @@ class ProductsController extends Controller
      {
          // 從 Model 拿資料
          $products = Product::paginate(25);
-         $positions = Product::allPositions()->pluck('products.position', 'products.position');
-         $positions = Product::allPositions()->pluck('products.price', 'products.price');
+         $discounts = Product::allDiscounts()->pluck('products.discount', 'products.discount');
 
         //把資料送給view
         return view('products.index', ['products' => $products,
-                                      'positions'=>$positions,
-                                      'selectedPosition'=>null,
-                                      'nationalities'=>$nationalities,
-                                      'selectedNationality'=>null]);
+                                      'discounts'=>$discounts,
+                                      'selectedDiscount'=>null]);
 
                          
     }  
@@ -51,32 +48,17 @@ class ProductsController extends Controller
     }
 
 
-    public function position(Request $request)
+    public function discount(Request $request)
     {
        
-        $products = Product::position($request->input('pos'))->paginate(25);
-        $positions = Product::allPositions()->pluck('products.position', 'products.position');
-        $selectedPosition = $request->input('pos');
-        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
-        return view('players.index', ['products' => $products,
-                                      'positions'=>$positions,
-                                      'selectedPosition'=>$selectedPosition,
-                                      'nationalities'=>$nationalities,
-                                      'selectedNationality'=>null]);
+        $products = Product::discount($request->input('discount'))->paginate(25);
+        $discounts = Product::allDiscounts()->pluck('products.discount', 'products.discount');
+        $selectedDiscount = $request->input('discount');
+        return view('products.index', ['products' => $products,
+                                      'discounts'=>$discounts,
+                                      'selectedDiscount'=>$selectedDiscount]);
     }
 
-    public function nationality(Request $request)
-    {
-        $players = Product::nationality($request->input('nationality'))->paginate(25);
-        $positions = Product::allPositions()->pluck('products.position', 'products.position');
-        $selectedNationality = $request->input('nationality');
-        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
-        return view('products.index', ['products' => $products,
-                                      'positions'=>$positions,
-                                      'selectedPosition'=>null,
-                                      'nationalities'=>$nationalities,
-                                      'selectedNationality'=>$selectedNationality]);
-    }   
     
     /**
      * Show the form for creating a new resource.

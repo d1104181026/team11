@@ -9,20 +9,12 @@
 <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
     <a href="{{ route('products.create') }} ">新增商品</a>
     <a href="{{ route('products.index') }} ">所有商品</a>
-    <form action="{{ url('products/position') }}" method='GET'>
-        {!! Form::label('pos', '選取位置：') !!}
-        {!! Form::select('pos', $product , $selectedProduct , ['class' => 'form-control']) !!}
+    <form action="{{ url('products/discount') }}" method='GET'>
+        {!! Form::label('discount', '選取折扣') !!}
+        {!! Form::select('discount', $discounts, $selectedDiscount , ['class' => 'form-control']) !!}
         <input class="btn btn-default" type="submit" value="查詢" />
         @csrf
     </form>
-
-    <form action="{{ url('products/nationality') }}" method='GET'>
-        {!! Form::label('nationality', '選取商店：') !!}
-        {!! Form::select('nationality', $nationalities, $selectedNationality, ['class' => 'form-control']) !!}
-        <input class="btn btn-default" type="submit" value="查詢" />
-        @csrf
-    </form>    
-
 </div>
 
 <table>
