@@ -4,9 +4,9 @@
 
 @section('_contents')
 <h1>顯示單一商店</h1>
-編號：{{ $product->id }}<br/>
-連鎖便利店：{{ $product->inventory }}<br/>
-官網：{{ $product->web }}<br/>
+編號：{{ $store->id }}<br/>
+連鎖便利店：{{ $store->inventory }}<br/>
+官網：{{ $store->web }}<br/>
 
 
 <h1>{{ $store->name }}的所有商品</h1>
