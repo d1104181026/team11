@@ -14,6 +14,7 @@ class ProductsTableSeeder extends Seeder
      * @return void
      */
     public function generateRandomName() {
+        
         $name = [
             '阿薩姆奶茶',
             '立頓原味奶茶',

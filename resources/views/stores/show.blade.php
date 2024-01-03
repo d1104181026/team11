@@ -1,14 +1,13 @@
 @extends('app')
 
-@section('title', '顯示特定商店')
-
-@section('ETAS_theme', '您所選取的商店資料')
+@section('title', '便利店網站 - 列出所有商品')
 
 @section('ETAS_contents')
 <h1>顯示單一商店</h1>
 編號：{{ $store->id }}<br/>
-連鎖便利商店：{{ $store->name }}<br/>
-官網：<a href="{{ $store->web }}" target="_blank">{{ $store->web }}</a><br/>
+連鎖便利店：{{ $store->inventory }}<br/>
+官網：{{ $store->web }}<br/>
+
 
 <h1>{{ $store->name }}的所有商品</h1>
 
@@ -18,16 +17,28 @@
         <th>價格</th>
         <th>優惠</th>
         <th>庫存量</th>
-        <th>連鎖商店</th>
+        <th>連鎖便利店</th>
+         
     </tr>
-    @foreach ($products as $product)
+
+
+
+
+
+@foreach ($products as $product)
         <tr>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->discount }}</td>
-            <td>{{ $product->inventory }}</td>
-            <td>{{ $product->store->name }}</td>
+            <td>{{ $products->name }} </td>
+            <td>{{ $products->price }} </td>
+            <td>{{ $products->discount }} </td>
+            <td>{{ $products->tid }} </td>
+            <td>{{ $products->store->name }} </td>
+           
         </tr>
+
+
     @endforeach
+
 <table>
+
+
 @endsection
