@@ -14,14 +14,22 @@ class Store extends Model
         'web'
     ];
 
-    public function stores()
+    public function products()
+
     {
-        return $this->hasMany('App\Models\Store', 'tid');
+        return $this->belongsTo('App\Models\Store','tid');
     }
 
     public function delete()
     {
         $this->products()->delete();
         return parent::delete();
+    }       
+
+    public function scopeZone($query, $zone)
+    {
+        
+        return $query->where('zone', '=', $zone);
     }
+
 }

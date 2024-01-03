@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Store;
+use App\Models\store;
 use App\Http\Requests\CreateProductRequest;
+use Illuminate\Http\Request;
+
 
 class ProductsController extends Controller
 {
@@ -13,32 +15,51 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // 從 Model 拿資料
-        $products = Product::paginate(25);
-        // 把資料送給 view
-        return view ('products.index')->with('products',$products);
-    }
 
-    public function indexs()
+     public function index()
+     {
+         // 從 Model 拿資料
+         $products = Product::paginate(25);
+         $discounts = Product::allDiscounts()->pluck('products.discount', 'products.discount');
+
+        //把資料送給view
+        return view('products.index', ['products' => $products,
+                                      'discounts'=>$discounts,
+                                      'selectedDiscount'=>null]);
+
+                         
+    }  
+ 
+
+    public function senior()
     {
         // 從 Model 拿特定條件下的資料
         $products = Product::paginate(25);
         $positions = Product::allPositions()->pluck('products.position', 'products.position');
+        $nationalities = Product::allNationalities()->pluck('products.nationality', 'products.nationality');
         //把資料送給view
-        return view('products.index', ['products' => $products, 'positions'=>$positions]);
+        return view('products.index', ['products' => $products,
+                                        'positions'=>$positions,
+                                        'selectedPosition'=>null,
+                                        'nationalities'=>$nationalities,
+                                        'selectedNationality'=>null]);
 
+          
     }
 
-    public function position(Request $request)
+
+    public function discount(Request $request)
     {
+       
+        $products = Product::discount($request->input('discount'))->paginate(25);
+        $discounts = Product::allDiscounts()->pluck('products.discount', 'products.discount');
+        $selectedDiscount = $request->input('discount');
+        return view('products.index', ['products' => $products,
+                                      'discounts'=>$discounts,
+                                      'selectedDiscount'=>$selectedDiscount]);
+    }
 
-        $products = Product::position($request->input('pos'))->paginate(25);
-        $positions = Product::allPositions()->pluck('products.position', 'products.position');
-        return view('products.index', ['products' => $products, 'positions'=>$positions]);
-    }   
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -81,6 +102,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         // 從 Model 拿資料
@@ -112,12 +134,12 @@ class ProductsController extends Controller
      */
     public function update(CreateProductRequest $request, $id)
     {
-        $product = Player::findOrFail($id);
+        $product = Product::findOrFail($id);
 
         $product->name = $request->input('name');
+        $product->tid = $request->input('tid');
         $product->price = $request->input('price');
         $product->discount = $request->input('discount');
-        $product->tid = $request->input('tid');
         $product->inventory = $request->input('inventory');
         $product->save();
 
@@ -132,7 +154,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
+        
+        $product = product::findOrFail($id);
         $product->delete();
         return redirect('products');
     }
