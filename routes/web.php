@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('products/create', [ProductsController::class, 'create'])->name('products.create')->middleware('can:admin');
     // 修改商品表單
     Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
-    // 修改球員資料
+    // 修改商品資料
     Route::patch('products/update/{id}', [ProductsController::class, 'update'])->where('id', '[0-9]+')->name('products.update');
     // 儲存新商品資料
     Route::post('products/store', [ProductsController::class, 'store'])->where('id', '[0-9]+')->name('products.store')->middleware('can:admin');
