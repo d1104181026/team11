@@ -1,5 +1,7 @@
 @extends('app')
+
 @section('title', '建立商店表單')
+
 @section('_theme', '建立商店的表單')
 
 @section('_contents')
