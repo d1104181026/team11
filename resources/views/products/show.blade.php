@@ -9,6 +9,6 @@
 商品名：{{ $product->name }}<br/>
 價格：{{ $product->price }}<br/>
 優惠：{{ $product->discount }}<br/>
-庫存量：{{ $product->inventorye}}<br/>
+庫存量：{{ $product->inventory}}<br/>
 連鎖便利店：{{ $product->stores->name }}<br/>
 @endsection

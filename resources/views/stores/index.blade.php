@@ -23,6 +23,7 @@
             <td>{{ $store->inventory }}</td>
             <td>{{ $store->web }}</td>
             <td><a href="{{ route('stores.show', ['id'=>$store->id]) }}">顯示</a></td>
+            @can('admin')
             <td><a href="{{ route('stores.edit', ['id'=>$store->id]) }}">修改</a></td>    
             <td>
                 <form action="{{ url('/stores/delete', ['id' => $store->id]) }}" method="post">
@@ -30,7 +31,10 @@
                     @method('delete')
                     @csrf
                 </form>
-            </td>    
+            </td> 
+            @elsecan('manager') 
+            <td><a href="{{ route('stores.edit' , ['id'=>$store->id]) }}">修改</a></td>
+            @endcan  
         </tr>
     @endforeach
 <table>
