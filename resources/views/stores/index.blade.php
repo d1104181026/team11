@@ -21,11 +21,11 @@
         <tr>
             <td>{{ $store->id }}</td>
             <td>{{ $store->inventory }}</td>
-            <td>{{ $store->official web }}</td>
+            <td>{{ $store->web }}</td>
             <td><a href="{{ route('stores.show', ['id'=>$store->id]) }}">顯示</a></td>
             <td><a href="{{ route('stores.edit', ['id'=>$store->id]) }}">修改</a></td>    
             <td>
-            <form action="{{ url('/stores/delete', ['id' => $store->id]) }}" method="post">
+                <form action="{{ url('/stores/delete', ['id' => $store->id]) }}" method="post">
                     <input class="btn btn-default" type="submit" value="刪除" />
                     @method('delete')
                     @csrf
