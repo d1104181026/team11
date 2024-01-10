@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
         return redirect('products');
     });
 
+    // 新增商品表單
+    Route::get('products/create', [ProductsController::class, 'create'])->name('products.create')->middleware('can:admin');
     // 顯示顯示所有商品資料
     Route::get('products', [ProductsController::class, 'index'])->name('products.index');
     // 顯示單一商品資料
@@ -32,8 +34,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
     // 刪除單一商品資料
     Route::delete('products/delete/{id}', [ProductsController::class, 'destroy'])->where('id', '[0-9]+')->name('products.destroy')->middleware('can:admin');
-    // 新增商品表單
-    Route::get('products/create', [ProductsController::class, 'create'])->name('products.create')->middleware('can:admin');
     // 修改商品表單
     Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->where('id', '[0-9]+')->name('products.edit');
     // 修改商品資料
@@ -66,6 +66,10 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
