@@ -67,8 +67,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $teams = Team::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
-        return view('products.create', ['teams' =>$stores, 'storeSelected' => null]);
+        $stores = store::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
+        return view('products.create', ['stores' =>$stores, 'storeSelected' => null]);
     }
 
     /**

@@ -7,7 +7,9 @@
 
 @section('ETAS_contents')
 <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+    @can('admin')
     <a href="{{ route('products.create') }} ">新增商品</a>
+    @endcan
     <a href="{{ route('products.index') }} ">所有商品</a>
     <form action="{{ url('products/discount') }}" method='GET'>
         {!! Form::label('discount', '選取折扣') !!}
@@ -25,8 +27,12 @@
         <th>連鎖便利店</th>
         <th>庫存量</th>
         <th>操作1</th>
+        @can('admin')
         <th>操作2</th>
         <th>操作3</th>
+        @elsecan('manager')
+        <th>操作2</th>
+        @endcan
     </tr>
 
 
@@ -41,6 +47,7 @@
             <td>{{ $product->tid }} </td>
             <td>{{ $product->inventory }} </td>
             <td><a href="{{ route('products.show',['id'=>$product->id]) }}" > 顯示</a></td>
+            @can('admin')
             <td><a href="{{ route('products.edit',['id'=>$product->id]) }}" > 修改</a></td>
             <td>
                 <form action="{{ url('/products/delete', ['id' => $product->id]) }}" method="post">
@@ -49,13 +56,12 @@
                     @csrf
                 </form>
             </td>
+            @elsecan('manager')
+            <td><a href="{{ route('products.edit', ['id'=>$product->id]) }}">修改</a></td>
+            @endcan
         </tr>
-
-
-    @endforeach
-
-<table>
-{{ $products->withQueryString()->links() }}
-
-@endsection
+        @endforeach
+    <table>
+    {{ $products->withQueryString()->links() }}
+    @endsection
 

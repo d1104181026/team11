@@ -6,6 +6,9 @@
 
     <title>@yield('title', '便利店網站')</title>
 
+     <!-- 引入 Bootstrap CSS -->
+     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -411,7 +414,7 @@
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-            <img src={{ URL::asset('images/stores.jpg') }} width="100%"/>
+            <img src={{ URL::asset('images/ESL.jpg') }} width="100%"/>
         </div>
         <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
             <div class="grid grid-cols-2 md:grid-cols-1">
@@ -419,7 +422,7 @@
                     @include('header')
                 </div>
                 <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                    @yield('_contents')
+                    @yield('ETAS_contents')
                 </div>
             </div>
         </div>
@@ -427,5 +430,7 @@
         @include('footer')
     </div>
 </div>
+ <!-- 引入 Bootstrap JavaScript -->
+ <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>
