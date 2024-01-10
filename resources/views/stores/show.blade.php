@@ -5,7 +5,7 @@
 @section('ETAS_contents')
 <h1>顯示單一商店</h1>
 編號：{{ $store->id }}<br/>
-連鎖便利店：{{ $store->inventory }}<br/>
+連鎖便利店：{{ $store->name }}<br/>
 官網：{{ $store->web }}<br/>
 
 

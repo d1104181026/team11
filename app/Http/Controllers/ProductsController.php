@@ -123,7 +123,7 @@ class ProductsController extends Controller
 
         $product = Product::findOrFail($id);
         $stores = Store::orderBy('stores.id', 'asc')->pluck('stores.name', 'stores.id');
-        $selected_tags = $product->store->id;
+        $selected_tags = $product->tid;
         return view('products.edit', ['product' =>$product, 'stores' => $stores, 'storeSelected' => $selected_tags]);
     }
 

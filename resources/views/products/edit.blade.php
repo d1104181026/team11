@@ -7,6 +7,6 @@
 @section('ETAS_contents')
     @include('message.list')
     {!! Form::model($product, ['method'=>'PATCH', 'action'=>['\App\Http\Controllers\ProductsController@update', $product->id]]) !!}
-    @include('players.form', ['submitButtonText'=>"更新球員資料"])
+    @include('products.form', ['submitButtonText'=>"更新商品資料"])
     {!! Form::close() !!}
 @endsection
