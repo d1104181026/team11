@@ -387,6 +387,7 @@
                 color: #cbd5e0;
                 color: rgba(203, 213, 224, var(--text-opacity))
             }
+
         }
     </style>
 

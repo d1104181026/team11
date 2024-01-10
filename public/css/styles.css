@@ -1996,7 +1996,7 @@ progress {
 
 .form-control {
   display: block;
-  width: 100%;
+  width: 150px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -11200,4 +11200,15 @@ body {
 
 .footer {
   padding: 5rem 0;
+}
+/* CSS */
+.discount-form {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 調整選單和按鈕之間的間距 */
+}
+
+.select-wrapper {
+  display: flex;
+  align-items: center;
 }

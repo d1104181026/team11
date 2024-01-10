@@ -11,25 +11,28 @@
     <a href="{{ route('products.create') }} ">新增商品</a>
     @endcan
     <a href="{{ route('products.index') }} ">所有商品</a>
-    <form action="{{ url('products/discount') }}" method='GET'>
-        {!! Form::label('discount', '選取折扣') !!}
+    <form action="{{ url('products/discount') }}" method='GET' class="discount-form">
+    <label for="discount">選取折扣</label>
+    <div class="select-wrapper">
         {!! Form::select('discount', $discounts, $selectedDiscount , ['class' => 'form-control']) !!}
         <input class="btn btn-default" type="submit" value="查詢" />
-        @csrf
-    </form>
+    </div>
+</form>
+
 </div>
+
 
 <table>
     <tr>
         <th>商品名</th>
-        <th>價格</th>
+        <th>價格　</th>
         <th>優惠</th>
-        <th>連鎖便利店</th>
-        <th>庫存量</th>
-        <th>操作1</th>
+        <th>連鎖便利店　</th>
+        <th>庫存量　</th>
+        <th>操作1　</th>
         @can('admin')
-        <th>操作2</th>
-        <th>操作3</th>
+        <th>操作2　</th>
+        <th>操作3　</th>
         @elsecan('manager')
         <th>操作2</th>
         @endcan

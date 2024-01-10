@@ -12,11 +12,11 @@
     <a href="{{ route('stores.store') }} ">新增店家資料</a>
 <table>
     <tr>
-        <th>編號</th>
-        <th>連鎖便利店</th>
+        <th>編號　</th>
+        <th>連鎖便利店　</th>
         <th>官網</th>
-        <th>建立時間</th>
-        <th>修改時間</th>
+        <th>建立時間　</th>
+        <th>修改時間　</th>
         <th>操作1</th>
         @can('admin')
         <th>操作2</th>
